@@ -22,14 +22,33 @@ Node* deleteList(Node*);
 
 int main() {
     Node *head = nullptr;
-    int count = 0;
+    float frontVal = 0.0;
 
     // create a linked list of size SIZE with random numbers 0-99
     for (int i = 0; i < SIZE; i++) {
         int tmp_val = rand() % 100;
-        head = addNodeFront(head, rand() % 100);
+        Node *newVal = new Node;
+        
+        // adds node at head
+        if (!head) { // if this is the first node, it's the new head
+            head = newVal;
+            newVal->next = nullptr;
+            newVal->value = tmp_val;
+        }
+        else { // its a second or subsequent node; place at the head
+            newVal->next = head;
+            newVal->value = tmp_val;
+            head = newVal;
+        }
     }
     output(head);
+
+    // adding a node to the front using a function and user input
+    cout << "What value to add to the front of the list? " << endl;
+    cin >> frontVal;
+    head = addNodeFront(head, frontVal);
+    output(head);
+
 
     // deleting a node
     Node * current = head;
@@ -85,14 +104,8 @@ int main() {
     output(head);
 
     // deleting the linked list
-    current = head;
-    while (current) {
-        head = current->next;
-        delete current;
-        current = head;
-    }
-    head = nullptr;
-    output(head);
+    head = deleteList(head);
+    output(head);    
 
     return 0;
 }
@@ -133,7 +146,6 @@ Node* addNodeFront(Node* head, float value)
 }
 
  
-
 // function for adding a node to the back
 
 // function for deleting a node
@@ -141,3 +153,17 @@ Node* addNodeFront(Node* head, float value)
 // function for inserting a node
 
 // function for deleting the list
+Node* deleteList(Node* head)
+{
+    Node *current = head;
+
+    // original while loop
+    while (current) {
+        Node *nextNode = current->next;  // creates a new node and stores next ndoe
+        delete current;                  // delete current
+        current = nextNode;              // advance to next node
+    }
+
+    return nullptr;
+}
+
