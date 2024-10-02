@@ -11,7 +11,14 @@ struct Node {
     Node *next;
 };
 
+// function prototypes
 void output(Node *);
+Node* addNodeFront(Node*, float);
+Node* addNodetail(Node*, float);
+Node* deleteNode(Node*, int);
+Node* insertNode(Node*, int, float);
+Node* deleteList(Node*);
+
 
 int main() {
     Node *head = nullptr;
@@ -20,19 +27,7 @@ int main() {
     // create a linked list of size SIZE with random numbers 0-99
     for (int i = 0; i < SIZE; i++) {
         int tmp_val = rand() % 100;
-        Node *newVal = new Node;
-        
-        // adds node at head
-        if (!head) { // if this is the first node, it's the new head
-            head = newVal;
-            newVal->next = nullptr;
-            newVal->value = tmp_val;
-        }
-        else { // its a second or subsequent node; place at the head
-            newVal->next = head;
-            newVal->value = tmp_val;
-            head = newVal;
-        }
+        head = addNodeFront(head, rand() % 100);
     }
     output(head);
 
@@ -102,6 +97,10 @@ int main() {
     return 0;
 }
 
+
+// function definitions
+
+// function for ouputting the list
 void output(Node * hd) {
     if (!hd) {
         cout << "Empty list.\n";
@@ -115,3 +114,30 @@ void output(Node * hd) {
     }
     cout << endl;
 }
+
+// function for adding a node to the front
+Node* addNodeFront(Node* head, float value)
+{
+    // create a new memory allocation for the new node
+    Node *newNode = new Node;
+    newNode->next = nullptr;
+
+    // initialize the new nodes value and next pointer
+    newNode->value = value;
+    newNode->next = head;
+
+    // have head now point to the new node
+    head = newNode;
+
+    return head;
+}
+
+ 
+
+// function for adding a node to the back
+
+// function for deleting a node
+
+// function for inserting a node
+
+// function for deleting the list
