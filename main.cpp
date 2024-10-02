@@ -1,3 +1,6 @@
+// COMSC-210 | Lab 17 | Mauricio Espinosa
+// IDE Used: Visual Studios Code & Github
+
 #include <iostream>
 using namespace std;
 
