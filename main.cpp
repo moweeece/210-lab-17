@@ -14,7 +14,7 @@ struct Node {
 // function prototypes
 void output(Node *);
 Node* addNodeFront(Node*, float);
-Node* addNodetail(Node*, float);
+Node* addNodeTail(Node*, float);
 Node* deleteNode(Node*, int);
 Node* insertNode(Node*, int, float);
 Node* deleteList(Node*);
@@ -22,7 +22,7 @@ Node* deleteList(Node*);
 
 int main() {
     Node *head = nullptr;
-    float frontVal = 0.0;
+    float frontVal, backVal = 0.0;
 
     // create a linked list of size SIZE with random numbers 0-99
     for (int i = 0; i < SIZE; i++) {
@@ -47,6 +47,13 @@ int main() {
     cout << "What value to add to the front of the list? " << endl;
     cin >> frontVal;
     head = addNodeFront(head, frontVal);
+    output(head);
+
+
+    // adding a node to the back using a function and user input
+    cout << "What value to add to the front of the list? " << endl;
+    cin >> backVal;
+    head = addNodeTail(head, backVal);
     output(head);
 
 
@@ -129,14 +136,14 @@ void output(Node * hd) {
 }
 
 // function for adding a node to the front
-Node* addNodeFront(Node* head, float value)
+Node* addNodeFront(Node* head, float frontValue)
 {
     // create a new memory allocation for the new node
     Node *newNode = new Node;
     newNode->next = nullptr;
 
     // initialize the new nodes value and next pointer
-    newNode->value = value;
+    newNode->value = frontValue;
     newNode->next = head;
 
     // have head now point to the new node
@@ -147,10 +154,31 @@ Node* addNodeFront(Node* head, float value)
 
  
 // function for adding a node to the back
+Node* addNodeTail(Node* head, float backValue)
+{
+    Node *newNode = new Node;
+    newNode->value = backValue;
+    newNode->next = nullptr;
+    
+    if (!head)
+    {
+        return newNode;
+    }
+
+    Node *current = head;
+    while (current->next != nullptr)
+    {
+        current = current->next;
+    }
+    current->next = newNode;
+    
+    return head;
+}
 
 // function for deleting a node
 
 // function for inserting a node
+
 
 // function for deleting the list
 Node* deleteList(Node* head)
